@@ -200,22 +200,22 @@ with tabs[0]:
             final_emotion = sarcasm_aware_adjustment(base_emotion, sarcasm_pred)
 
             col1, col2, col3, col4 = st.columns(4)
-
+            
             with col1:
                 st.metric("Sarcasm Detected", "YES ❗" if sarcasm_pred == "sarcastic" else "NO")
-
+            
             with col2:
-                st.metric("Sarcasm Confidence", f"{sarcasm_conf * 100:.2f}%")
-
+                st.metric("Sarcastic Prob", f"{sarcasm_prob * 100:.2f}%")
+            
             with col3:
-                st.metric("Raw Emotion", f"{EMOTION_EMOJIS.get(base_emotion, '')} {base_emotion}")
-
+                st.metric("Non-Sarcastic Prob", f"{non_sarcasm_prob * 100:.2f}%")
+            
             with col4:
-                st.metric("Emotion Confidence", f"{max(emotion_probs.values()) * 100:.2f}%")
+                st.metric("Raw Emotion", f"{EMOTION_EMOJIS.get(base_emotion, '')} {base_emotion}")
+            
+            st.progress(float(sarcasm_prob))
+            st.caption("Progress bar shows sarcastic probability.")
 
-            # Sarcasm probability visualization (sarcastic class)
-            st.progress(min(max(sarcasm_prob, 0.0), 1.0))
-            st.caption(f"Sarcasm Probability (sarcastic class): {sarcasm_prob:.2f}")
 
             st.markdown("### 📊 Emotion Probability Distribution")
             st.plotly_chart(plot_emotion_probs(emotion_probs), use_container_width=True)
