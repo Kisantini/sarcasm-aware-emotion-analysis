@@ -28,17 +28,15 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # -----------------------------
 @st.cache_resource
 def load_models():
-    sarcasm_tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+    sarcasm_tokenizer = BertTokenizer.from_pretrained("Kisantini/sarcasm-bert")
     sarcasm_model = BertForSequenceClassification.from_pretrained(
-        "models_saved/sarcasm_bert"
+        "Kisantini/sarcasm-bert"
     ).to(DEVICE)
-    sarcasm_model.eval()
 
-    emotion_tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+    emotion_tokenizer = BertTokenizer.from_pretrained("Kisantini/emotion-bert")
     emotion_model = BertForSequenceClassification.from_pretrained(
-        "models_saved/emotion_bert"
+        "Kisantini/emotion-bert"
     ).to(DEVICE)
-    emotion_model.eval()
 
     return sarcasm_tokenizer, sarcasm_model, emotion_tokenizer, emotion_model
 
