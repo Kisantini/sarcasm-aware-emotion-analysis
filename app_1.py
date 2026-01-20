@@ -199,7 +199,7 @@ with tabs[0]:
             base_emotion, emotion_probs = predict_emotion(cleaned)
             final_emotion = sarcasm_aware_adjustment(base_emotion, sarcasm_pred)
 
-            col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3, col4 = st.columns(3)
             
             with col1:
                 st.metric("Sarcasm Detected", "YES ❗" if sarcasm_pred == "sarcastic" else "NO")
@@ -208,9 +208,6 @@ with tabs[0]:
                 st.metric("Sarcastic Prob", f"{sarcasm_prob * 100:.2f}%")
             
             with col3:
-                st.metric("Non-Sarcastic Prob", f"{non_sarcasm_prob * 100:.2f}%")
-            
-            with col4:
                 st.metric("Raw Emotion", f"{EMOTION_EMOJIS.get(base_emotion, '')} {base_emotion}")
             
             st.progress(float(sarcasm_prob))
